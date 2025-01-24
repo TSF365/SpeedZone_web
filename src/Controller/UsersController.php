@@ -103,8 +103,8 @@ class UsersController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['login']);
-        $this->Authentication->addUnauthenticatedActions(['login', 'add']);
+        //$this->Authentication->addUnauthenticatedActions(['login']);
+        //$this->Authentication->addUnauthenticatedActions(['login', 'add']);
     }
 
     public function login()
@@ -136,6 +136,27 @@ class UsersController extends AppController
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }
+
+        public function register()
+    {
+        $this->request->allowMethod(['get', 'post']);
+        $user = $this->Users->newEmptyEntity();
+
+        if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('User registered successfully.'));
+                
+                // Redireciona para a página de login ou outra página apropriada
+                return $this->redirect('/');
+            } else {
+                $this->Flash->error(__('Failed to register user. Please, try again.'));
+            }
+        }
+
+        $this->set(compact('user'));
+    }
+
 
         /* public function logout()
         {
