@@ -47,6 +47,10 @@ class UsersTable extends Table
         'dependent' => true,  // This will ensure that related Estatisticasjogador records are deleted when a user is deleted
         'cascadeCallbacks' => true,  // Ensures that related data is properly handled when saving or deleting
     ]);
+
+    $this->hasMany('Modificacoes', [
+        'foreignKey'=> 'idJogador',
+        ]);
 }
 
 

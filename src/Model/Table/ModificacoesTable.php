@@ -40,6 +40,11 @@ class ModificacoesTable extends Table
         $this->setTable('modificacoes');
         $this->setDisplayField('idModificacao');
         $this->setPrimaryKey('idModificacao');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'idJogador',
+            'joinType' => 'INNER',
+            ]);
     }
 
     /**

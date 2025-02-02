@@ -13,7 +13,9 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
-
+$login_url="/users/login";
+$register_url="/users/register";
+$download_url= "/";
 $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
@@ -42,12 +44,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
       </button>
       <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3">
         <ul class="navbar-nav">
-          <li class="nav-item mx-2"> <a class="nav-link" href="#">Registar</a> </li>
-          <li class="nav-item mx-2"> <a class="nav-link" href="#">Download</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link" href="<?php echo $register_url ?>">Registar</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link" href="<?php echo $download_url ?>">Download</a> </li>
           <li class="nav-item mx-2"> <a class="nav-link navbar-brand mr-0 text-primary" href="#"><i class="fa d-inline fa-lg fa-stop-circle-o"></i>
               <b> SpeedZone</b></a> </li>
           <li class="nav-item mx-2"> <a class="nav-link" href="#">Pedir Funcionalidade</a> </li>
-          <li class="nav-item mx-2"> <a class="nav-link" href="#">Login</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link" href="<?php echo $login_url ?>">Login</a> </li>
         </ul>
       </div>
     </div>

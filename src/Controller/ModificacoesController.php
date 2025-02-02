@@ -21,6 +21,11 @@ class ModificacoesController extends AppController
         $modificacoes = $this->paginate($query);
 
         $this->set(compact('modificacoes'));
+        
+        $query = $this->Modificacoes->find()->contain(['Users']);  // Adicionando o contain
+        $modificacoes = $this->paginate($query);
+
+        $this->set(compact('modificacoes'));
     }
 
     /**
@@ -33,6 +38,11 @@ class ModificacoesController extends AppController
     public function view($id = null)
     {
         $modificaco = $this->Modificacoes->get($id, contain: []);
+        $this->set(compact('modificaco'));
+
+        $modificaco = $this->Modificacoes->get($id, [
+            'contain' => ['Users'] // Adicionando o contain aqui também
+        ]);
         $this->set(compact('modificaco'));
     }
 
@@ -93,6 +103,23 @@ class ModificacoesController extends AppController
             $this->Flash->success(__('The modificaco has been deleted.'));
         } else {
             $this->Flash->error(__('The modificaco could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+    public function approve($id = null)
+    {
+        $this->request->allowMethod(['post']);
+
+        $modificaco = $this->Modificacoes->get($id);
+
+        $modificaco->status = 1;
+
+        if ($this->Modificacoes->save($modificaco)) {
+            $this->Flash->success(__('The modificaco has been approved.'));
+        } else {
+            $this->Flash->error(__('The modificaco could not be approved. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
